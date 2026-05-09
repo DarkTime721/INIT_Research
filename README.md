@@ -74,7 +74,9 @@ Replace with real NaturalQuestions data for publication-grade results.
 
 Places the relevant document at every position from 0 → N−1 while everything else stays fixed. Produces the signature **U-shaped accuracy curve** — high at start and end, low in the middle.
 
-**Output:** `exp1_u_curve.png`
+**Output:**
+
+![Experiment 1](outputs/exp1_u_curve.png)
 
 ---
 
@@ -83,7 +85,9 @@ Places the relevant document at every position from 0 → N−1 while everything
 
 Pure lookup task — no reasoning, just find a 4-digit value for a given key. Strips away all comprehension complexity so any failure is purely positional. Middle positions drop toward zero.
 
-**Output:** `exp2_kv.png`
+**Output:** 
+
+![Experiment 2](outputs/exp2_kv.png)
 
 > **Troubleshooting:** If all positions return 0.0, `tinyllama` is overflowing its context. Reduce `num_pairs` to 15 and use loose substring matching (`tval in pred`).
 
@@ -94,7 +98,9 @@ Pure lookup task — no reasoning, just find a 4-digit value for a given key. St
 
 Sweeps two dimensions simultaneously: needle depth (0%→100%) and context length (500→2K chars). Output is a heatmap — green = found, red = missed. LITM appears as a dark band at middle depths.
 
-**Output:** `exp3_niah.png`
+**Output:**
+
+![Experiment 3](outputs/exp3_niah.png)
 
 ---
 
@@ -103,7 +109,9 @@ Sweeps two dimensions simultaneously: needle depth (0%→100%) and context lengt
 
 Compares accuracy with short gold passages (minimal, one sentence) vs. long gold passages (with surrounding context). Short chunks amplify positional sensitivity — directly relevant to RAG chunk-size decisions.
 
-**Output:** `exp4_gold_context.png`
+**Output:**
+
+![Experiment 4](outputs/exp4_gold_context.png)
 
 ---
 
@@ -112,7 +120,9 @@ Compares accuracy with short gold passages (minimal, one sentence) vs. long gold
 
 Falsification test: randomly shuffles document order on every trial instead of sweeping systematically. If the U-shape survives shuffling, the bias is **architectural** — not a learned content heuristic. It survives.
 
-**Output:** `exp5_shuffled.png`
+**Output:**
+
+![Experiment 5](outputs/exp5_shuffled.png)
 
 ---
 
@@ -121,7 +131,9 @@ Falsification test: randomly shuffles document order on every trial instead of s
 
 Reruns the position sweep at three document counts. Tests whether degradation scales with context length. It does — roughly linearly. Simply extending the context window does not fix the problem.
 
-**Output:** `exp6_scaling.png`
+**Output:**
+
+![Experiment 6](outputs/exp6_scaling.png)
 
 ---
 
@@ -130,7 +142,9 @@ Reruns the position sweep at three document counts. Tests whether degradation sc
 
 Introduces a single scalar metric: **Gap Accuracy = max accuracy − min accuracy across positions**. Zero means perfectly position-agnostic; higher means more positional sensitivity. Aggregates results from all prior experiments into one comparison chart.
 
-**Output:** `exp7_gap.png`
+**Output:**
+
+![Experiment 7](outputs/exp7_gap.png)
 
 ---
 
@@ -141,7 +155,9 @@ Compares short-term memory (fact at end of context) vs. long-term memory (fact a
 
 > Full attention-weight ablation (disrupting specific heads) requires a HuggingFace model with `output_attentions=True`.
 
-**Output:** `exp8_memory.png`
+**Output:**
+
+![Experiment 8](outputs/exp8_memory.png)
 
 ---
 
@@ -156,7 +172,9 @@ The only experiment that **fixes** the problem rather than measuring it. Decompo
 
 Forces a genuine context-wide search. Compared against baseline using both position accuracy and Rouge-L.
 
-**Output:** `exp9_pam.png`
+**Output:**
+
+![Experiment 9](outputs/exp9_pam.png)
 
 ---
 
@@ -164,7 +182,9 @@ Forces a genuine context-wide search. Compared against baseline using both posit
 
 A 3×3 grid showing all 9 experiment results in a single figure.
 
-**Output:** `litm_summary_dashboard.png`
+**Output:** 
+
+![Summary](outputs/litm_summary_dashboard.png)
 
 ---
 
